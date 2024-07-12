@@ -6,20 +6,21 @@ using namespace std;
 #include <ext/pb_ds/tree_policy.hpp>
 using namespace __gnu_pbds;
 #define oset tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
+  //////////////
+ //less_equal//
+//////////////
 
-long long binpow(long long x, long long y, long long M){
-    long long r=1;
-    long long z=x%M;
-    while(y){
-        if(y&1){
-            r=(r*z)%M;
-        }
-        z=(z*z)%M;
-        y>>=1;
-    }
-    return r;
-}
 
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    
+    oset pbds;
+
+    pbds.insert(5);
+
+    pbds.order_of_key(5);
+    *(pbds.find_by_order(0));
+
     return 0;
 }

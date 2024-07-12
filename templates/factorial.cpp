@@ -20,6 +20,38 @@ long long binpow(long long x, long long y, long long M){
     return r;
 }
 
+const int MAXF=1000001;
+int M=1e9+7;
+
+int fact[MAXF];
+int factinv[MAXF];
+
+void pnc(){
+    fact[0]=1;
+    for(int i=1;i<MAXF;i++){
+        fact[i]=(fact[i-1]*1LL*i)%M;
+    }
+    factinv[MAXF-1]=binpow(fact[MAXF-1],M-2,M);
+    for(int i=MAXF-2;i>=0;i--){
+        factinv[i]=(factinv[i+1]*1LL*(i+1))%M;
+    }
+}
+
+int comb(int a, int b){
+    if(a<=b){
+        return a==b;
+    }
+    return (((fact[a]*1LL*factinv[a-b])%M)*factinv[b])%M;
+}
+
+
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin>>t;
+    while(t--){
+        
+    }
     return 0;
 }

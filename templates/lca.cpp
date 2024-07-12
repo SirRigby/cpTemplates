@@ -9,23 +9,32 @@ using namespace __gnu_pbds;
 
 struct Sparse{
 
-    typedef long long td;
-    static const td identity=0;
+    typedef int td;
+    static const td identity=INT_MAX;
 
     struct Node{
 
         td val;
-
+        td index;
         Node(){
             val=identity;
+            index=-1;
         }
 
-        Node(td val1){
+        Node(td val1, int ind){
             val=val1;
+            index=ind;
         }
 
         void merge(Node &n1, Node &n2){
-            val=n1.val + n2.val;
+            if(n1.val<=n2.val){
+                val=n1.val;
+                index=n1.index;
+            }
+            else{
+                val=n2.val;
+                index=n2.index;
+            }
         }
 
     };
@@ -49,7 +58,7 @@ struct Sparse{
 
     void build(){
         for(int i=0;i<n;i++){
-            table[i][0]=Node(v[i]);
+            table[i][0]=Node(v[i],i);
         }
         for(int i=1;i<=logn;i++){
             for(int j=0;j+(1<<i)<=n;j++){
@@ -87,6 +96,47 @@ struct Sparse{
         return ans;
     }
 
+};
+
+struct Lca{
+
+    int n;
+    vector<int> eulertour, index, node;
+    Sparse table=Sparse(0,eulertour);
+
+    Lca(int n1, vector<int> adj[], int root){
+        n=n1;
+        index.resize(n);
+        dfs(root,adj,-1,0);
+        table=Sparse(eulertour.size(),eulertour);
+    }
+
+    void dfs(int r, vector<int> adj[], int parent, int height){
+
+        eulertour.push_back(height);
+        node.push_back(r);
+        index[r]=node.size()-1;
+
+        for(auto i: adj[r]){
+            if(i==parent){
+                continue;
+            }
+            
+            dfs(i,adj,r,height+1);
+            eulertour.push_back(height);
+            node.push_back(r);
+        }
+
+    }
+
+    int que(int a, int b){
+        return node[table.queryf((index[a],index[b]),max(index[a],index[b])).index];
+    }
+
+    int depth(int a){
+        return eulertour[index[a]];
+    }
+    
 };
 
 int main(){

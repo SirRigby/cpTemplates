@@ -7,19 +7,27 @@ using namespace std;
 using namespace __gnu_pbds;
 #define oset tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
 
-long long binpow(long long x, long long y, long long M){
-    long long r=1;
-    long long z=x%M;
-    while(y){
-        if(y&1){
-            r=(r*z)%M;
-        }
-        z=(z*z)%M;
-        y>>=1;
-    }
-    return r;
+static const int MAXN=100000;
+template<int len=1>
+int f(int m){
+    if(len < m) {
+        return f<min(len<<1,MAXN)>(m);
+    } 
+    bitset<len+1> b;
+    //
 }
 
+//f(m); 
+
+
+
 int main(){
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int t;
+    cin>>t;
+    while(t--){
+        
+    }
     return 0;
 }

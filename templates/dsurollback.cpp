@@ -11,19 +11,23 @@ struct DSU{
 
     int n;
     vector<int> v;
-    vector<int> sz;
-
+    vector<int> rnk;
+    // vector<int> sz;
+    stack<pair<pair<int,int>,pair<int,int>>> op;
+    
     DSU(int n1 ){
         n=n1;
         v.resize(n);
-        sz.resize(n);
+        rnk.resize(n);
+        // sz.resize(n);
         make();
     }
 
     void make(){
         for(int i=0;i<n;i++){
             v[i]=i;
-            sz[i]=1;
+            rnk[i]=0;
+            // sz[i]=1;
         }
     }
 
@@ -31,52 +35,41 @@ struct DSU{
         if(i==v[i]){
             return i;
         }
-        return v[i]=find(v[i]);
+        return find(v[i]);
     }
 
     bool unio(int i, int j){
         i=find(i);
         j=find(j);
         if(i==j){return 0;}
-        if(sz[i]<sz[j]){
+        if(rnk[i]<rnk[j]){
             swap(i,j);
         }
-        sz[i]+=sz[j];
+        op.push({{i,rnk[i]},{j,rnk[j]}});
+        if(rnk[i]==rnk[j]){
+            rnk[i]++;
+        }
         v[j]=i;
+        // sz[i]+=sz[j];
         return 1;
+    }
+
+    void rollback(){
+        if(op.empty()){
+            return;
+        }
+        auto p=op.top();
+        op.pop();
+        v[p.first.first]=p.first.first;
+        v[p.second.first]=p.second.first;
+        rnk[p.first.first]=p.first.second;
+        rnk[p.second.first]=p.second.second;
+        // sz[p.first.first]=sz[p.second.first];
     }
 
 };
 
 int main(){
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    int n,m;
-    cin>>n>>m;
-    pair<long long,pair<int,int>> v[m];
-    DSU dsu(n);
-    for(int i=0;i<m;i++){
-        int x,y;long long c;
-        cin>>x>>y>>c;x--;y--;
-        v[i]={c,{x,y}};
-    }
-    sort(v,v+m);
-    long long h=0;
-    int yy=n;
-    for(int i=0;i<m;i++){
-        long long c;int x,y;
-        c=v[i].first;
-        x=v[i].second.first;
-        y=v[i].second.second;
-        if(!dsu.unio(x,y)){
-            continue;
-        }
-        h+=c;
-        yy--;
-    }
-    if(yy!=1){
-        cout<<"IMPOSSIBLE";return 0;
-    }
-    cout<<h;
+    
     return 0;  
 }
