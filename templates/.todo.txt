@@ -1,0 +1,3 @@
+z algo
+mo's
+//implement faster modulo operations    

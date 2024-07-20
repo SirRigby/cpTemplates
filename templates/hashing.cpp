@@ -9,10 +9,10 @@ using namespace __gnu_pbds;
 
 struct HashGen{
 
-    long long p1=999999751,p2=1000000033;
+    static const long long p1=999999751,p2=1000000033;
     long long c=69;
     long long p=71;
-    vector<long long> primes={p1,p2};
+    const vector<long long> primes={p1,p2};
     int y=primes.size();
     vector<vector<long long>> pref;
     vector<vector<long long>> bip;

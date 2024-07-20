@@ -70,6 +70,46 @@ struct DSU{
 };
 
 int main(){
-    
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
+    int n,m;
+    cin>>n>>m;
+    pair<long long,pair<int,int>> v[m];
+    vector<vector<int>> edges;
+    DSU dsu(n);
+    //
+    for(int i=0;i<m;i++){
+        int x,y;long long c;
+        cin>>x>>y>>c;x--;y--;
+        v[i]={c,{x,y}};
+    }
+    //
+
+    {
+    vector<pair<int,pair<int,int>>> v; 
+    for(int i=0;i<edges.size();i++){
+        v.push_back({edges[i][2],{edges[i][0],edges[i][1]}});
+        v.push_back({edges[i][2],{edges[i][0],edges[i][1]}});
+    }
+    }
+
+    sort(v,v+m);
+    long long h=0;
+    int yy=n;
+    for(int i=0;i<m;i++){
+        long long c;int x,y;
+        c=v[i].first;
+        x=v[i].second.first;
+        y=v[i].second.second;
+        if(!dsu.unio(x,y)){
+            continue;
+        }
+        h+=c;
+        yy--;
+    }
+    if(yy!=1){
+        cout<<"IMPOSSIBLE";return 0;
+    }
+    cout<<h;
     return 0;  
 }

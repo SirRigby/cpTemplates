@@ -15,7 +15,9 @@ void sieve(int MS=MSV ){
         int u=3+2*i;
         if(primes[i]==0){
             for(int j=(u*u-3)/2;j<MS/2;j+=u){
-                primes[j]=u;
+                if(primes[j]==0){
+                    primes[j]=u;
+                }
 
             }
         }

@@ -15,6 +15,7 @@ void bfs(vector<int> adj[], vector<bool> & vis){
 
     while(!qu.empty()){
         int par=qu.front();
+        qu.pop();
         for(auto i: adj[par]){
             if(vis[i]){
                 continue;
@@ -35,7 +36,7 @@ int main(){
     cin>>t;
     while(t--){
 
-        int n;
+        int n,m;
         vector<vector<int>> edges;
 
         {
@@ -62,15 +63,23 @@ int main(){
         }
 
         pair<int,int> i;
+        int vis[n][m];
+        queue<pair<int,int>> qu;
+
         int w1[]={1,0,0,-1};
         int w2[]={0,1,-1,0};
+
         int k,m;
 
         {
-
-            int x=i.first+w1[k],y=i.second+w2[k];
-            if(x>=0 && y>=0 && x<n && y<m){
-
+            for(int itk=0;itk<4;itk++){
+                int x=i.first+w1[itk],y=i.second+w2[itk];
+                if(x>=0 && y>=0 && x<n && y<m){
+                    if(vis[x][y]){
+                        continue;
+                    }
+                    vis[x][y]=1;
+                    qu.push({x,y});
             }
         }
         

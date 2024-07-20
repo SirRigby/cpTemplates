@@ -42,7 +42,7 @@ int main(){
     cin>>t;
     while(t--){
 
-        int n;
+        int n,m;
         vector<vector<int>> edges;
 
         {
@@ -60,7 +60,7 @@ int main(){
 
         int iszero=1;
         vector<int> adj[n];
-        for(int i=0;i<edges.size();i++){
+        for(int i=0;i<m;i++){
             int x,y;cin>>x>>y;
             adj[x-iszero].push_back(y-iszero);
             adj[y-iszero].push_back(x-iszero);
