@@ -7,8 +7,9 @@ using namespace std;
 using namespace __gnu_pbds;
 #define oset tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
 
-void bfs(vector<int> adj[], vector<bool> & vis){
-
+void bfs(vector<int> adj[], int n){
+    bool vis[n];
+    memset(vis,0,sizeof(vis));
     queue<int> qu;
     qu.push(0);
     vis[0]=1;
@@ -81,6 +82,8 @@ int main(){
                     vis[x][y]=1;
                     qu.push({x,y});
             }
+        }
+
         }
         
     }

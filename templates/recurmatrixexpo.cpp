@@ -52,7 +52,7 @@ struct Matrix{
     }
 };
 
-Matrix matpow(Matrix x, int y, long long M){
+Matrix matpow(Matrix x, int y, int M){
     Matrix r(x.n,'^');
     Matrix z(x.v);
     while(y){
@@ -65,7 +65,7 @@ Matrix matpow(Matrix x, int y, long long M){
     return r;
 }
 
-int M=1e9+7;
+static const int M=1e9+7;
 
 int findRecur(vector<int> &coeff, vector<int> &bases, int n){
     int deg=coeff.size();

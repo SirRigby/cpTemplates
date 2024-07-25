@@ -30,43 +30,43 @@ struct Segtree{
         }
     };
 
-    vector<Node> tree;
+    vector<Node> treenodes;
     int n;
     int s;
 
     Segtree(int n1){
-        int s=1;
+        s=1;
         n=n1;
         while(s<2*n){
             s<<=1;
         }
-        tree.resize(s,Node());
+        treenodes.resize(s,Node());
     }
 
     Segtree(int n1, td arr[]){
-        int s=1;
+        s=1;
         n=n1;
         while(s<2*n){
             s<<=1;
         }
-        tree.resize(s,Node());
+        treenodes.resize(s,Node());
         build(0,n-1,1,arr); 
     }
 
     void build(int start, int end, int index, td arr[]){
         if(start==end){
-            tree[index]=Node(arr[start]);
+            treenodes[index]=Node(arr[start]);
             return;
         }
         int mid=(start+end)/2;
         build(start,mid,index<<1,arr);
         build(mid+1,end,(index<<1)|1,arr);
-        tree[index].merge(tree[(index<<1)|1],tree[index<<1]);
+        treenodes[index].merge(treenodes[(index<<1)|1],treenodes[index<<1]);
     }
 
     void update(int start, int end, int index, int queIndex, td val){
         if(start==end){
-            tree[index].apply(val);
+            treenodes[index].apply(val);
             return;
         }
         int mid=(start+end)/2;
@@ -76,7 +76,7 @@ struct Segtree{
         else{
             update(mid+1,end,2*index+1,queIndex,val);
         }
-        tree[index].merge(tree[2*index],tree[2*index+1]);
+        treenodes[index].merge(treenodes[2*index],treenodes[2*index+1]);
     }
 
     Node query(int start, int end, int index, int left, int right){
@@ -84,7 +84,7 @@ struct Segtree{
             return Node();
         }
         if (start>=left && end<=right){
-            return tree[index];
+            return treenodes[index];
         }
         int mid=(start+end)/2;
         Node l=query(start,mid,2*index,left,right);

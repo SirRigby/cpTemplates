@@ -42,41 +42,41 @@ struct Segtree{
         }
     };
 
-    vector<Node> tree;
+    vector<Node> treenodes;
     vector<Update> lazy;  
     int n;
     int s;
 
     Segtree(int n1){
-        int s=1;
+        s=1;
         n=n1;
         while(s<2*n){
             s<<=1;
         }
-        tree.resize(s,Node());
+        treenodes.resize(s,Node());
         lazy.resize(s,Update());
     }
 
     Segtree(int n1, td arr[]){
-        int s=1;
+        s=1;
         n=n1;
         while(s<2*n){
             s<<=1;
         }
-        tree.resize(s,Node());
+        treenodes.resize(s,Node());
         lazy.resize(s,Update());
         build(0,n-1,1,arr); 
     }
 
     void build(int start, int end, int index, td arr[]){
         if(start==end){
-            tree[index]=Node(arr[start]);
+            treenodes[index]=Node(arr[start]);
             return;
         }
         int mid=(start+end)/2;
         build(start,mid,index<<1,arr);
         build(mid+1,end,(index<<1)|1,arr);
-        tree[index].merge(tree[(index<<1)|1],tree[index<<1]);
+        treenodes[index].merge(treenodes[(index<<1)|1],treenodes[index<<1]);
     }
 
     void prop(int index, int start, int end){
@@ -92,7 +92,7 @@ struct Segtree{
         if(start!=end){
             lazy[index].combine(parent,start,end);
         }
-        parent.apply(tree[index],start,end);
+        parent.apply(treenodes[index],start,end);
     }
     
     void update(int start, int end, int index, int left,int right, Update& parent){
@@ -107,7 +107,7 @@ struct Segtree{
         int mid=(start+end)/2;
 	    update(start,mid,2*index,left,right,parent);
 		update(mid+1,end,2*index+1,left,right,parent);
-		tree[index].merge(tree[2*index],tree[2*index+1]);
+		treenodes[index].merge(treenodes[2*index],treenodes[2*index+1]);
     }
 
     Node query(int start, int end, int index, int left, int right){
@@ -116,7 +116,7 @@ struct Segtree{
         }
         prop(index,start,end);
         if (start>=left && end<=right){
-            return tree[index];
+            return treenodes[index];
         }
         int mid=(start+end)/2;
         Node l=query(start,mid,2*index,left,right);
@@ -134,6 +134,25 @@ struct Segtree{
     td que(int left, int right){
         Node ans= query(0,n-1,1,left,right);
         return ans.val;
+    }
+
+    td findIndexOfPrefixSumLowerBound(td target){
+        int start=0,end= n-1;
+        int index=1;
+        while(start!=end){
+            prop(index,start,end);
+            int mid=(start+end)/2;
+            if(treenodes[index*2].val>=target){
+                index=index*2;
+                end=mid;
+            }
+            else{
+                index=index*2+1;
+                target-=treenodes[index*2].val;
+                start=mid+1;
+            }
+        }
+        return start;
     }
 
 };

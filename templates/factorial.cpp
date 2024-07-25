@@ -7,21 +7,24 @@ using namespace std;
 using namespace __gnu_pbds;
 #define oset tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
 
-long long binpow(long long x, long long y, long long M){
-    long long r=1;
-    long long z=x%M;
+int binpow(int x, int y, int M){
+    int r=1;
+    int z=x;
+    if(z>=M){
+        z-=M;
+    }
     while(y){
         if(y&1){
-            r=(r*z)%M;
+            r=(1LL*r*z)%M;
         }
-        z=(z*z)%M;
+        z=(1LL*z*z)%M;
         y>>=1;
     }
     return r;
 }
 
 const int MAXF=1000001;
-int M=1e9+7;
+const int M=1e9+7;
 
 int fact[MAXF];
 int factinv[MAXF];
