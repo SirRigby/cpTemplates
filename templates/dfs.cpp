@@ -68,6 +68,26 @@ int main(){
 
         }
 
+        int w1[]={1,0,0,-1};
+        int w2[]={0,1,-1,0};
+        int vis[n][n];
+        int k,m;
+        pair<int,int> i;
+
+        {
+            for(int itk=0;itk<4;itk++){
+                int x=i.first+w1[itk],y=i.second+w2[itk];
+                if(x>=0 && y>=0 && x<n && y<m){
+                    if(vis[x][y]){
+                        continue;
+                    }
+                    vis[x][y]=1;
+                    // dfs(x,y,vis);
+                }
+            }
+
+        }
+
         
     }
     return 0;

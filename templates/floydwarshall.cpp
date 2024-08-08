@@ -25,7 +25,7 @@ void floydw(int n, vector<pair<int,tds>> adj[]){
         for(int i=0;i<n;i++){
             for(int j=0;j<n;j++){
                 if(dist[i][k]<INF && dist[k][j]<INF){
-                    dist[i][j]=min(dist[i][j],dist[i][k]+dist[j][k]);
+                    dist[i][j]=min(dist[i][j],dist[i][k]+dist[k][j]);
                 }
             }
         }

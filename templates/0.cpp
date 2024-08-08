@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#define TxtIO freopen("input.txt","r",stdin); freopen("output.txt","w",stdout);
+#define TxtIO freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt","w", stderr) ;
 using namespace std;
 
 #include <ext/pb_ds/assoc_container.hpp>
