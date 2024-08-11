@@ -68,7 +68,7 @@ void ctdfs(int r, vector<int> adj[], int par, int lo[], int timer[], int & time,
         }
 
         else{
-            ctdfs(i,adj,par,lo,timer,time, cuts);
+            ctdfs(i,adj,r,lo,timer,time, cuts);
             c++;
             lo[r]=min(lo[r],lo[i]);
             if(lo[i]>=timer[r] && par!=-1){

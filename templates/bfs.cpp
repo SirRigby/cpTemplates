@@ -73,14 +73,14 @@ int main(){
         int k,m;
 
         {
-            for(int itk=0;itk<4;itk++){
-                int x=i.first+w1[itk],y=i.second+w2[itk];
-                if(x>=0 && y>=0 && x<n && y<m){
-                    if(vis[x][y]){
-                        continue;
-                    }
-                    vis[x][y]=1;
-                    qu.push({x,y});
+        for(int itk=0;itk<4;itk++){
+            int x=i.first+w1[itk],y=i.second+w2[itk];
+            if(x>=0 && y>=0 && x<n && y<m){
+                if(vis[x][y]){
+                    continue;
+                }
+                vis[x][y]=1;
+                qu.push({x,y});
             }
         }
 
