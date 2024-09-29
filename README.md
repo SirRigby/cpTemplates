@@ -38,11 +38,15 @@ Contains efficient codes for a range of widely used algorithms
   + Lazy Propagation Segment Tree
   + Memory Efficient Lazy Propagation Segment Tree
   + Memory Efficient Segment Tree
+  + Mo's Algorithm
+  + Mo's Algorithm with Lazy Updates
   + Segment Tree
   + Sparse Table
 
 - Miscellaneous
   + Memory Efficient Bitset
   + Comparators
+  + Random Number Generator
   + Lambda Functions
   + Ordered Set
+  + Set/Xor/Permutation Hashing
