@@ -1,3 +1,7 @@
 z algo
-mo's
+dynamic connectivity
+hld
+network flow
+min cost max flow
+bipartite matching
 //implement faster modulo operations    

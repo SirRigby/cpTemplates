@@ -1,5 +1,5 @@
 #include<bits/stdc++.h>
-#define TxtIO freopen("input.txt","r",stdin); freopen("output.txt","w",stdout); freopen("error.txt","w", stderr) ;
+#define TxtIO freopen("input.txt","r",stdin); freopen("output.txt","w",stdout);
 using namespace std;
 
 #include <ext/pb_ds/assoc_container.hpp>
@@ -7,19 +7,17 @@ using namespace std;
 using namespace __gnu_pbds;
 #define oset tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
 
-
-// rolling/permutation
 struct HashGen{
 
     static const int p1=999999751,p2=1000000033;
     int c=69;
-    int p=1e9+7;
+    int p=71;
     const vector<int> primes={p1,p2};
     int y=primes.size();
     vector<vector<int>> pref;
     vector<vector<int>> bip;
 
-    int binpow(long long x, int y, long long M){
+    int binpow(int x, int y, int M){
         int r=1;
         int z=x;
         if(z>=M){
@@ -34,7 +32,7 @@ struct HashGen{
         }
         return r;
     }
-    HashGen(vector<int> &s){
+    HashGen(string &s){
         int sz=s.size();
         pref.resize(y,vector<int> (sz+1,0));
         bip.resize(y,vector<int> (sz+1));
@@ -42,7 +40,7 @@ struct HashGen{
             int prim=primes[pr];
             int h=1;
             for(int i=0;i<sz;i++){
-                pref[pr][i+1]=((1LL*(s[i]+c)*h)%prim+pref[pr][i]);
+                pref[pr][i+1]=((1LL*(s[i]-'a'+1+c)*h)%prim+pref[pr][i]);
                 if(pref[pr][i+1]>=prim){
                     pref[pr][i+1]-=prim;
                 }
@@ -73,14 +71,14 @@ struct HashGen{
 
 };
 
-// set
-struct SetHash{
-    static const int M=1e9+7;
-    vector<int> seta;
-    int random;
-    int pw=78;
+struct HashN{
+    int p1=999999751,p2=1000000033;
+    int c=69;
+    int p=71;
+    vector<int> primes={p1,p2};
+    int y=primes.size();
 
-    int binpow(int x, int y, const int M){
+    int binpow(int x, int y, int M){
         int r=1;
         int z=x;
         if(z>=M){
@@ -95,69 +93,44 @@ struct SetHash{
         }
         return r;
     }
-
-    SetHash(vector<int> &v){
-        seta.resize(v.size()+1);
-        seta[0]=0;
-        mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-        random=rng();
-        while(random>=M){
-            random-=M;
+    //v[i][prime]
+    vector<vector<int>> que(string &s, int n){
+        vector<vector<int>> v;
+        if(s.size()<n){
+            return v;
         }
-        for(int i=0;i<v.size();i++){
-            int ele=random+v[i];
-            seta[i+1]=binpow(ele,pw,M);
-            seta[i+1]+=seta[i];
-            if(seta[i+1]>=M){
-                seta[i+1]-=M;
-            }
-        }
-    }
-
-    int que(int i, int j){
-        int res=seta[j+1]-seta[i];
-        if(res<0){
-            res+=M;
-        }
-        return res;
-    }
-};
-
-// xor
-struct XorHash{
-    map<unsigned long long, unsigned long long> mping;
-    set<unsigned long long> used={0};
-    vector<unsigned long long> xora;
-
-    XorHash(vector<int>& v){
-        xora.resize(v.size()+1);
-        xora[0]=0;
-        mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
-        for(int i=0;i<v.size();i++){
-            unsigned long long random;
-            if(mping.find(v[i])==mping.end()){
-                random=rng();
-                while(used.find(random)!=used.end()){
-                    random=rng();
+        int sz=s.size();
+        v.resize(s.size()-n+1,vector<int> (y));
+        for(int pr=0;pr<y;pr++){
+            int r=0;
+            int minv=binpow(p,n,primes[pr]);
+            for(int i=0;i<sz;i++){
+                r=(1LL*r*p)%primes[pr];
+                if(i>=n){
+                    r-=(1LL*(s[i-n]-'a'+1+c)*minv)%primes[pr];
+                    if(r<0){
+                        r+=primes[pr];
+                    }
+                    if(r>=primes[pr]){
+                        r-=primes[pr];
+                    }
                 }
-                mping[v[i]]=random;
-                used.insert(random);
+                r+=(s[i]-'a'+1+c);
+                if(r>=primes[pr]){
+                    r-=primes[pr];
+                }
+                if(i>=n-1){
+                    v[i-n+1][pr]=r;
+                }
             }
-            else{
-                random=mping[v[i]];
-            }
-            xora[i+1]=xora[i]^random;
         }
-    }
-
-    unsigned long long que(int i, int j){
-        unsigned long long res=xora[j+1]^xora[i];
-        return res;
+        return v;
     }
 
 };
+
 
 int main(){
-
+    
     return 0;
 }

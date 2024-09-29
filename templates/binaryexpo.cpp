@@ -23,6 +23,24 @@ int binpow(int x, int y, int M){
     return r;
 }
 
+// 1+x+x^2+...+x^y
+int binsum(int x, int y, int M){
+    long long z=1;
+    long long sum=1;
+    long long r=x;
+    while(y){
+        if(y&1){
+            sum=(z+(sum*r)%M)%M;
+        }
+        z+=(r*z)%M;
+        z%=M;
+        r*=r;
+        r%=M;
+        y>>=1;
+    }
+    return sum;
+}
+
 
 long long binpow(long long x, long long y, long long M){
     long long r=1;

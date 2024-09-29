@@ -166,7 +166,7 @@ struct Segtree{
                 return end;
             }
             Node leftval;
-            bruteCombine(start,mid,,(index<<1),leftval,arr);
+            bruteCombine(start,mid,(index<<1),leftval,arr);
             if(leftval.val>=target){
                 index=(index<<1);
                 end=mid;

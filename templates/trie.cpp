@@ -9,8 +9,10 @@ using namespace __gnu_pbds;
 
 struct Trie{
 
+    char offset='a';
+    static const int length=26;
+
     struct Node{
-        static const int length=26;
         Node* links[length];
         bool flag=false;
         Node(){
@@ -23,10 +25,10 @@ struct Trie{
     void insert(string &s){
         Node* r= root;
         for(int i=0;i<s.size();i++){
-            if((r->links)[s[i]-'a']==nullptr){
-                (r->links)[s[i]-'a']=new Node();
+            if((r->links)[s[i]-offset]==nullptr){
+                (r->links)[s[i]-offset]=new Node();
             }
-            r=r->links[s[i]-'a'];
+            r=r->links[s[i]-offset];
         }
         r->flag=1;
     }
@@ -34,10 +36,10 @@ struct Trie{
     bool search(string& s){
         Node* r=root;
         for(int i=0;i<s.size();i++){
-            if((r->links)[s[i]-'a']==nullptr){
+            if((r->links)[s[i]-offset]==nullptr){
                 return 0;
             }
-            r=r->links[s[i]-'a'];
+            r=r->links[s[i]-offset];
         }
         return r->flag;
     }

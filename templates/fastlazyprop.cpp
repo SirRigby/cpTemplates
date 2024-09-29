@@ -197,8 +197,8 @@ struct Segtree{
         while(start!=end){
             prop(index,start,end);
             if(index>=s){
-                prop(ind*2,start,mid);
-                prop(ind*2+1,mid+1,end);
+                prop(index*2,start,mid);
+                prop(index*2+1,mid+1,end);
                 int ans=start;
                 while(target>0 && ans<=end){
                     target-=arr[ans].val;

@@ -42,8 +42,30 @@ struct Bintrie{
         }
     }
 
-    int search(int n){
-        if(cnt<=1){
+    bool search(int n){
+        Node *r= root;
+        for(int i=len-1;i>=0;i--){
+            if((r->links)[((1<<i)&n)!=0]==nullptr){
+                return 0;
+            }
+            r=(r->links)[((1<<i)&n)!=0];
+        }
+        return 1;
+    }
+
+    bool search(string &s){
+        Node *r= root;
+        for(int i=0;i<s.size();i++){
+            if((r->links)[s[i]-'0']==nullptr){
+                return 0;
+            }
+            r=(r->links)[s[i]-'0'];
+        }
+        return 1;
+    }
+
+    int searchMax(int n){
+        if(cnt<1){
             return -1;
         }
         Node* r=root;
@@ -60,8 +82,8 @@ struct Bintrie{
         return p;
     }
 
-    int search(string &s){
-        if(cnt<=1){
+    int searchMax(string &s){
+        if(cnt<1){
             return -1;
         }
         Node* r=root;
