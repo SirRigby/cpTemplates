@@ -1,5 +1,3 @@
-z algo
-dynamic connectivity
 hld
 network flow
 min cost max flow
