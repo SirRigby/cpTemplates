@@ -8,10 +8,12 @@ Contains efficient codes for a range of widely used algorithms
   + Dijkstra's Algorithm
   + Disjoint Set Union
   + DSU with Rollbacks
+  + Dynamic DSU
   + Floyd Warshall Algorithm
   + Kahn Algorithm
   + Kosaraju Algorithm
-  + Prim's and Kruskal's Algorithms
+  + Prim's Algorithm
+  + Kruskal's Algorithm
   + Tarjan's Algorithm
   + Topological Sort
 
@@ -20,6 +22,8 @@ Contains efficient codes for a range of widely used algorithms
   + Factorial and Combinatorics
   + Matrix Exponentiation
   + Euclid Sieve and Segmented Sieve
+  + Modular Multiplicative Inverse
+  + Linear Diophantine Equation
 
 - Tree Algorithms
   + Lowest Common Ancester
@@ -30,6 +34,8 @@ Contains efficient codes for a range of widely used algorithms
   + String Hashing and Rabin Karp Algorithm
   + KMP Algorithm
   + Trie
+  + Manacher's Algorithm
+  + Z Algorithm
 
 - Range Queries
   + Fenwick Tree
