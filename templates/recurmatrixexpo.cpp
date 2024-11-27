@@ -7,12 +7,14 @@ using namespace std;
 using namespace __gnu_pbds;
 #define oset tree<int, null_type,less<int>, rb_tree_tag,tree_order_statistics_node_update>
 
+typedef int td;
+
 struct Matrix{
     int n,m;
-    vector<vector<int>> v;
-    int M=1e9+7;
+    vector<vector<td>> v;
+    static const td M=1e9+7;
 
-    Matrix(vector<vector<int>> &v1){
+    Matrix(vector<vector<td>> &v1){
         n=v1.size();
         m=n;
         v=v1;
@@ -20,12 +22,12 @@ struct Matrix{
     Matrix(int n1){
         n=n1;
         m=n;
-        v.resize(n,vector<int>(n,0));
+        v.resize(n,vector<td>(n,0));
     }
     Matrix(int n1, char isIdentity){
         n=n1;
         m=n;
-        v.resize(n,vector<int>(n,0));
+        v.resize(n,vector<td>(n,0));
         for(int i=0;i<n;i++){
             v[i][i]=1;
         }
@@ -33,7 +35,7 @@ struct Matrix{
     Matrix(int n1,int m1){
         n=n1;
         m=m1;
-        v.resize(n,vector<int> (m,0));
+        v.resize(n,vector<td> (m,0));
     }
 
     Matrix operator *(Matrix a){
@@ -52,7 +54,7 @@ struct Matrix{
     }
 };
 
-Matrix matpow(Matrix x, int y, int M){
+Matrix matpow(Matrix x, td y, int M){
     Matrix r(x.n,'^');
     Matrix z(x.v);
     while(y){
@@ -67,7 +69,7 @@ Matrix matpow(Matrix x, int y, int M){
 
 static const int M=1e9+7;
 
-int findRecur(vector<int> &coeff, vector<int> &bases, int n){
+td findRecur(vector<td> &coeff, vector<td> &bases, td n){
     int deg=coeff.size();
     if(n<deg){
         return bases[n];

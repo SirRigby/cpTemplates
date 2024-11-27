@@ -77,7 +77,7 @@ struct HashGen{
 struct SetHash{
     static const int M=1e9+7;
     vector<int> seta;
-    int random;
+    int randomno;
     int pw=78;
 
     int binpow(int x, int y, const int M){
@@ -100,12 +100,12 @@ struct SetHash{
         seta.resize(v.size()+1);
         seta[0]=0;
         mt19937 rng(chrono::steady_clock::now().time_since_epoch().count());
-        random=rng();
-        while(random>=M){
-            random-=M;
+        randomno=rng();
+        while(randomno>=M){
+            randomno-=M;
         }
         for(int i=0;i<v.size();i++){
-            int ele=random+v[i];
+            int ele=randomno+v[i];
             seta[i+1]=binpow(ele,pw,M);
             seta[i+1]+=seta[i];
             if(seta[i+1]>=M){
@@ -134,19 +134,19 @@ struct XorHash{
         xora[0]=0;
         mt19937_64 rng(chrono::steady_clock::now().time_since_epoch().count());
         for(int i=0;i<v.size();i++){
-            unsigned long long random;
+            unsigned long long randomno;
             if(mping.find(v[i])==mping.end()){
-                random=rng();
-                while(used.find(random)!=used.end()){
-                    random=rng();
+                randomno=rng();
+                while(used.find(randomno)!=used.end()){
+                    randomno=rng();
                 }
-                mping[v[i]]=random;
-                used.insert(random);
+                mping[v[i]]=randomno;
+                used.insert(randomno);
             }
             else{
-                random=mping[v[i]];
+                randomno=mping[v[i]];
             }
-            xora[i+1]=xora[i]^random;
+            xora[i+1]=xora[i]^randomno;
         }
     }
 

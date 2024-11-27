@@ -1,5 +1,10 @@
+debugger (printer of data structures, input of vectors, arrays)
+aho corasick
+miller rabin/ random prime in given range
 hld
+2d segtree
+persistent segtree
 network flow
 min cost max flow
 bipartite matching
-//implement faster modulo operations    
+//implement faster modulo operations

@@ -61,7 +61,7 @@ struct Segtree{
         int mid=(start+end)/2;
         build(start,mid,index<<1,arr);
         build(mid+1,end,(index<<1)|1,arr);
-        treenodes[index].merge(treenodes[(index<<1)|1],treenodes[index<<1]);
+        treenodes[index].merge(treenodes[(index<<1)],treenodes[(index<<1)|1]);
     }
 
     void update(int start, int end, int index, int queIndex, td val){
