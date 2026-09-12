@@ -13,11 +13,11 @@ struct Fenwick{
 
     int n;
     vector<td> v;
-    td identity=0;
+    td idt=0;
 
     Fenwick(int n1){
         n=n1;
-        v.resize(n,identity);
+        v.resize(n,idt);
     }
 
     void upd(int pos, td val){
@@ -28,7 +28,7 @@ struct Fenwick{
     }
 
     td que(int pos){
-        td h=identity;
+        td h=idt;
         for(;pos>=0;pos&=(1+pos),pos--){
             //
             h+=v[pos];
@@ -37,10 +37,10 @@ struct Fenwick{
     }
 
     td search(td val){
-        td h=identity;
+        td h=idt;
         int pos=-1;
         for(int i=30;i>=0;i--){
-            td newh=identity;
+            td newh=idt;
             int newpos=pos+(1<<i);
             if(newpos<n){
                 //
@@ -56,7 +56,7 @@ struct Fenwick{
 
     Fenwick(int n1, vector<td>& a, int a_size){
         n=n1;
-        v.resize(n,identity);
+        v.resize(n,idt);
         for(int i=0;i<a_size;i++){
             upd(i,a[i]);
         }

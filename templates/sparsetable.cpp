@@ -10,14 +10,14 @@ using namespace __gnu_pbds;
 struct Sparse{
 
     typedef long long td;
-    static const td identity=0;
+    static const td idt=0;
 
     struct Node{
 
         td val;
 
         Node(){
-            val=identity;
+            val=idt;
         }
 
         Node(td val1){

@@ -82,18 +82,19 @@ struct Bintrie{
         return p;
     }
 
-    int searchMax(string &s){
+    string searchMax(string &s){
         if(cnt<1){
-            return -1;
+            return "-1";
         }
         Node* r=root;
-        int p=0;
+        string p;
         for(int i=0;i<s.size();i++){
             if((r->links)[(s[i]-'0')^1]!=nullptr){
-                p|=(1<<i);
+                p.push_back('1');
                 r=(r->links)[(s[i]-'0')^1];
             }
             else{
+                p.push_back('0');
                 r=(r->links)[(s[i]-'0')];
             }
         }

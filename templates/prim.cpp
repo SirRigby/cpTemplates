@@ -28,10 +28,11 @@ void prim(int n, vector<pair<int,tds>> adj[]){
             if(vis[child]==0 && (par[child]==-1 || dist[child]>wt)){
                 if(par[child]!=-1){
                     pq.erase({dist[child],child});
-                    dist[child]=wt;
-                    pq.insert({wt,child});
-                    par[child]=node;
+                
                 }
+                dist[child]=wt;
+                pq.insert({wt,child});
+                par[child]=node;
             }
         }
     }

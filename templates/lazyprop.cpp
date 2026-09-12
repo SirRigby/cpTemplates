@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 struct Segtree{
     typedef long long td;
     //
-    static const td identity=0;
+    static const td idt=0;
 
     struct Node{
         td val;
         Node(){
-            val=identity;
+            val=idt;
         }
         Node(long long p){
             val=p;
@@ -29,7 +29,7 @@ struct Segtree{
     struct Update {
         td val;
         Update(){ 
-            val = identity;
+            val = idt;
         }
         Update(td val1) { 
             val = val1;
@@ -80,7 +80,7 @@ struct Segtree{
     }
 
     void prop(int index, int start, int end){
-        if(lazy[index].val!=identity){
+        if(lazy[index].val!=idt){
             int mid=(start+end)/2;
             propdown(2*index,start,mid,lazy[index]);
             propdown(2*index+1,mid+1,end,lazy[index]);
@@ -139,16 +139,25 @@ struct Segtree{
     td findIndexOfPrefixSumLowerBound(td target){
         int start=0,end= n-1;
         int index=1;
-        while(start!=end){
+        while(start<=end){
             prop(index,start,end);
             int mid=(start+end)/2;
+            if(start==end){
+                    if(treenodes[index].val>=target){
+                        index=index*2;
+                        return start;
+                    }
+                    else{
+                        break;
+                    }
+            }
             if(treenodes[index*2].val>=target){
                 index=index*2;
                 end=mid;
             }
             else{
-                index=index*2+1;
                 target-=treenodes[index*2].val;
+                index=index*2+1;
                 start=mid+1;
             }
         }

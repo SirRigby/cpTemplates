@@ -10,12 +10,12 @@ using namespace __gnu_pbds;
 struct Segtree{
     typedef long long td;
     //
-    static const td identity=0;
+    static const td idt=0;
 
     struct Node{
         td val;
         Node(){
-            val=identity;
+            val=idt;
         }
         Node(long long p){
             val=p;

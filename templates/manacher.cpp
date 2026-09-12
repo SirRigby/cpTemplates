@@ -31,6 +31,8 @@ vector<int> manacher(string &t){
         }
     }
     return v;
+
+    // return t.substr(z/2-v[z]/2,v[z]); // z = argmax_i(v[i])
 }
 
 int main(){

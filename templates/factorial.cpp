@@ -28,8 +28,12 @@ const int M=1e9+7;
 
 int fact[MAXF];
 int factinv[MAXF];
-
+bool pncActive=0;
 void pnc(){
+    if(pncActive){
+        return;
+    }
+    pncActive=1;
     fact[0]=1;
     for(int i=1;i<MAXF;i++){
         fact[i]=(fact[i-1]*1LL*i)%M;
