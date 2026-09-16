@@ -144,7 +144,6 @@ struct Segtree{
             int mid=(start+end)/2;
             if(start==end){
                     if(treenodes[index].val>=target){
-                        index=index*2;
                         return start;
                     }
                     else{

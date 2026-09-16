@@ -130,7 +130,7 @@ struct Lca{
     }
 
     int que(int a, int b){
-        return node[table.queryf((index[a],index[b]),max(index[a],index[b])).index];
+        return node[table.queryf(min(index[a],index[b]),max(index[a],index[b])).index];
     }
 
     int depth(int a){
